@@ -1,5 +1,9 @@
-import { Button } from "@/components/ui/button";
+import { Navbar } from "@/components/Shared/Navbar";
 
 export default function Home() {
-  return <Button>Hola tarea</Button>;
+  return (
+    <div className="relative bg-zinc-900">
+      <Navbar />
+    </div>
+  );
 }
