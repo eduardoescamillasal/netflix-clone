@@ -3,6 +3,8 @@ import { BellRing, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 import { Logo } from "@/components/Shared/Logo";
+import { itemsNavbar } from "@/data/itemsNavbar";
+import Link from "next/link";
 
 export function NavbarDesktop() {
   return (
@@ -16,10 +18,15 @@ export function NavbarDesktop() {
           <div className="flex items-center gap-2">
             <Logo />
             <div className="ml-10 flex gap-4">
-              <p>Home</p>
-              <p>Movies</p>
-              <p>Series</p>
-              <p>Profile</p>
+              {itemsNavbar.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.link}
+                  className="transition-all duration-300 hover:text-gray-300"
+                >
+                  {item.name}
+                </Link>
+              ))}
             </div>
           </div>
           <div className="flex items-center gap-4">
