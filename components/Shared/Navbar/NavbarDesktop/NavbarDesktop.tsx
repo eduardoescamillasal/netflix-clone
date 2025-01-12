@@ -14,8 +14,8 @@ export function NavbarDesktop() {
   return (
     <div
       className={cn(
-        "fixed left-0 right-0 z-30 h-16 w-full transition-all duration-300",
-        scrollPosition < 20 ? "bg-black" : "bg-transparent",
+        "fixed left-0 right-0 top-0 z-30 h-16 w-full transition-all duration-300",
+        scrollPosition > 20 ? "bg-black" : "bg-transparent",
       )}
     >
       <div className="mx-auto h-full px-[4%]">
