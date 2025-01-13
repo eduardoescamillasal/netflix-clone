@@ -15,6 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { formSchema } from "./LoginForm.form";
 import { useState } from "react";
+import { FormError } from "./FormError";
 
 export function LoginForm() {
   const [error, setError] = useState<string | undefined>("");
@@ -70,7 +71,7 @@ export function LoginForm() {
             </FormItem>
           )}
         />
-        <p>Form Error: </p>
+        <FormError message={error} />
         <Button type="submit" className="w-full bg-[#E50914]">
           Start Session
         </Button>
