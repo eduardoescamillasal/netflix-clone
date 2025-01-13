@@ -1,12 +1,16 @@
-import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
+
+import { Checkbox } from "@/components/ui/checkbox";
+
 import { Terms } from "./Terms";
+import { LoginForm } from "./LoginForm";
 
 export default function LoginPage() {
   return (
     <div>
       <p className="mb-7 text-left text-3xl font-bold">Start session</p>
-      <p>Form login ...</p>
+      <LoginForm />
+
       <div className="mt-5 text-center">
         <Link href="/" className="hover:underline hover:opacity-70">
           Did you forget your password?
