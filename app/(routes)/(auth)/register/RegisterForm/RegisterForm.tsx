@@ -13,42 +13,32 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { formSchema } from "./LoginForm.form";
-import { useState } from "react";
-import { FormError } from "./FormError";
+import { formSchema } from "./RegisterForm.form";
 
-export function LoginForm() {
-  const [error, setError] = useState<string | undefined>("");
+export function RegisterForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
       password: "",
+      repeatPassword: "",
     },
   });
 
-  // 2. Define a submit handler.
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     console.log(values);
   };
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="flex w-full flex-col gap-4"
-      >
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
           name="email"
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input
-                  placeholder="Email"
-                  {...field}
-                  className="h-14 text-white"
-                />
+                <Input placeholder="Email" {...field} className="h-14" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -63,17 +53,33 @@ export function LoginForm() {
                 <Input
                   placeholder="Password"
                   {...field}
+                  className="h-14"
                   type="password"
-                  className="h-14 text-white"
                 />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <FormError message={error} />
+        <FormField
+          control={form.control}
+          name="repeatPassword"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Input
+                  placeholder="Repeat Password"
+                  {...field}
+                  className="h-14"
+                  type="password"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <Button type="submit" className="w-full bg-[#E50914]">
-          Sign In
+          Sign Up
         </Button>
       </form>
     </Form>

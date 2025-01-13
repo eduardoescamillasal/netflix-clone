@@ -2,13 +2,13 @@ import Link from "next/link";
 
 import { Checkbox } from "@/components/ui/checkbox";
 
-import { Terms } from "./Terms";
+import { Terms } from "../components/Terms";
 import { LoginForm } from "./LoginForm";
 
 export default function LoginPage() {
   return (
     <div>
-      <p className="mb-7 text-left text-3xl font-bold">Start session</p>
+      <p className="mb-7 text-left text-3xl font-bold">Sign In</p>
       <LoginForm />
 
       <div className="mt-5 text-center">
