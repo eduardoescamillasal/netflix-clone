@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { formSchema } from "./RegisterForm.form";
+import { toast } from "@/hooks/use-toast";
 
 export function RegisterForm() {
   const form = useForm<z.infer<typeof formSchema>>({
@@ -29,8 +30,16 @@ export function RegisterForm() {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.post("/api/auth/register", values);
+
+      toast({
+        title: "User created successfully",
+      });
     } catch (error) {
       console.log(error);
+      toast({
+        title: "Error creating user",
+        variant: "destructive",
+      });
     }
   };
 
