@@ -3,6 +3,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -20,10 +22,14 @@ import { FormAddProfileProps } from "./FormAddProfile.types";
 import { formSchema } from "./FormAddProfile.form";
 import { dataProfilesImages } from "./FormAddProfile.data";
 import Image from "next/image";
+import { toast } from "@/hooks/use-toast";
+import { useState } from "react";
 
 export function FormAddProfile(props: FormAddProfileProps) {
   const { setOpen } = props;
-  // 1. Define your form.
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -33,10 +39,30 @@ export function FormAddProfile(props: FormAddProfileProps) {
   });
 
   // 2. Define a submit handler.
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      setIsLoading(true);
+      const response = await axios.post("/api/userNetflix", values);
+      if (response.status !== 200) {
+        toast({
+          title: "Ups! Something went wrong",
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "User added successfully",
+        });
+      }
+      router.refresh();
+      setOpen(false);
+    } catch (error) {
+      console.log(error);
+      toast({
+        title: "Ups! Something went wrong",
+        variant: "destructive",
+      });
+      setIsLoading(false);
+    }
   };
   return (
     <Form {...form}>
@@ -96,7 +122,9 @@ export function FormAddProfile(props: FormAddProfileProps) {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" disabled={isLoading}>
+          Add User
+        </Button>
       </form>
     </Form>
   );
