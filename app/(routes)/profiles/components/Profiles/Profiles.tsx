@@ -1,11 +1,14 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { ProfilesProps } from "./Profiles.types";
-import { AddProfile } from "./AddProfile";
+import axios from "axios";
 import Image from "next/image";
-import { cn } from "@/lib/utils";
 import { useState } from "react";
+import { Trash2 } from "lucide-react";
 
+import { cn } from "@/lib/utils";
+
+import { toast } from "@/hooks/use-toast";
+
+import { Button } from "@/components/ui/button";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,12 +20,28 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
-import { Trash2 } from "lucide-react";
+import { AddProfile } from "./AddProfile";
+import { ProfilesProps } from "./Profiles.types";
+import { useRouter } from "next/navigation";
 
 export function Profiles(props: ProfilesProps) {
   const { users } = props;
   const [manageProfiles, setManageProfiles] = useState(false);
+  const router = useRouter();
 
+  const deleteUser = async (userIdNetflix: string) => {
+    try {
+      axios.delete("/api/userNetflix", { data: { userIdNetflix } });
+      setManageProfiles(false);
+      router.refresh();
+    } catch (error) {
+      console.log(error);
+      toast({
+        title: "Ups! Something went wrong",
+        variant: "destructive",
+      });
+    }
+  };
   return (
     <div>
       <div className="flex gap-7">
@@ -64,7 +83,7 @@ export function Profiles(props: ProfilesProps) {
                     <AlertDialogCancel>Back</AlertDialogCancel>
                     <AlertDialogAction
                       className="border border-red-500 text-red-500"
-                      onClick={() => console.log("DELETE USER ...")}
+                      onClick={() => deleteUser(user.id)}
                     >
                       Delete
                     </AlertDialogAction>
