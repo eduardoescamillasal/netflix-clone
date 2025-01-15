@@ -10,11 +10,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (token.sub && session.user) {
         session.user.id = token.sub;
       }
-      //session.user.anene = token.anene;
+
       return session;
     },
     async jwt({ token }) {
-      //token.anene = "añeñe";
       return token;
     },
   },
