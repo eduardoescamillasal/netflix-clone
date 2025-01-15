@@ -16,8 +16,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { formSchema } from "./RegisterForm.form";
 import { toast } from "@/hooks/use-toast";
+import { useRouter } from "next/navigation";
 
 export function RegisterForm() {
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -34,6 +37,7 @@ export function RegisterForm() {
       toast({
         title: "User created successfully",
       });
+      router.push("/profiles");
     } catch (error) {
       console.log(error);
       toast({
