@@ -7,6 +7,7 @@ import { Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 import { toast } from "@/hooks/use-toast";
+import { useCurrentNetflixUser } from "@/hooks/use-current-user";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -23,11 +24,19 @@ import {
 import { AddProfile } from "./AddProfile";
 import { ProfilesProps } from "./Profiles.types";
 import { useRouter } from "next/navigation";
+import { UserNetflix } from "@prisma/client";
 
 export function Profiles(props: ProfilesProps) {
   const { users } = props;
+  const { changeCurrentUser, currentUser } = useCurrentNetflixUser();
+
   const [manageProfiles, setManageProfiles] = useState(false);
   const router = useRouter();
+
+  const onClickUser = (user: UserNetflix) => {
+    changeCurrentUser(user);
+    router.push("/");
+  };
 
   const deleteUser = async (userIdNetflix: string) => {
     try {
@@ -46,7 +55,11 @@ export function Profiles(props: ProfilesProps) {
     <div>
       <div className="flex gap-7">
         {users.map((user) => (
-          <div key={user.id} className="relative cursor-pointer text-center">
+          <div
+            key={user.id}
+            className="relative cursor-pointer text-center"
+            onClick={() => onClickUser(user)}
+          >
             <Image
               src={user.avatarUrl || ""}
               alt={`Profile Image ${user.profileName}`}
