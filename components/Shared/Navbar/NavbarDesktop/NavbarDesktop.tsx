@@ -1,14 +1,19 @@
 "use client";
 import { BellRing, Search } from "lucide-react";
+import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 
-import { Logo } from "@/components/Shared/Logo";
-import { itemsNavbar } from "@/data/itemsNavbar";
-import Link from "next/link";
 import { useScrollPosition } from "@/hooks/useScrollPosition";
+import { itemsNavbar } from "@/data/itemsNavbar";
 
-export function NavbarDesktop() {
+import { SelectorProfile } from "@/components/Shared/Navbar/SelectorProfile";
+import { Logo } from "@/components/Shared/Logo";
+
+import { NavbarDesktopProps } from "./NavbarDesktop.types";
+
+export function NavbarDesktop(props: NavbarDesktopProps) {
+  const { users } = props;
   const scrollPosition = useScrollPosition();
 
   return (
@@ -38,8 +43,7 @@ export function NavbarDesktop() {
             <Search className="cursor-pointer" />
             <BellRing className="cursor-pointer" />
             <div className="flex items-center gap-2">
-              {/* Todo: Add Profile Picture */}
-              <p>User</p>
+              <SelectorProfile users={users} />
             </div>
           </div>
         </div>
