@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { TrendingMoviesProps } from "./TrendingMovies.types";
+import { InfoExtraFilm } from "./InfoExtraFilm";
 
 export function TrendingMovies(props: TrendingMoviesProps) {
   const { movies } = props;
@@ -31,6 +32,7 @@ export function TrendingMovies(props: TrendingMoviesProps) {
                   className="h-auto w-auto md:max-h-[100px] lg:max-w-full"
                 />
               </div>
+              <InfoExtraFilm movie={movie} />
             </div>
           ))}
         </div>
