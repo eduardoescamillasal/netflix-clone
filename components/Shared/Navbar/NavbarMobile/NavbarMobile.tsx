@@ -6,7 +6,11 @@ import { itemsNavbar } from "@/data/itemsNavbar";
 import { Logo } from "@/components/Shared/Logo";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
-export function NavbarMobile() {
+import { NavbarMobileProps } from "./NavbarMobile.types";
+import { SelectorProfile } from "@/components/Shared/Navbar/SelectorProfile";
+
+export function NavbarMobile(props: NavbarMobileProps) {
+  const { users } = props;
   return (
     <div className="flex justify-between p-4">
       <Logo />
@@ -31,8 +35,7 @@ export function NavbarMobile() {
           <div className="mt-4 flex justify-between gap-6">
             <Search className="cursor-pointer" />
             <BellRing className="cursor-pointer" />
-            <p>User</p>
-            {/* Todo: Add User Profile  */}
+            <SelectorProfile users={users} />
           </div>
         </SheetContent>
       </Sheet>
