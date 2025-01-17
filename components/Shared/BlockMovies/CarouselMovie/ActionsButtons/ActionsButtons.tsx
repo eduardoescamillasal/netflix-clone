@@ -1,10 +1,24 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { ActionsButtonsProps } from "./ActionsButtons.types";
-import { Play, Plus, ThumbsUp, X } from "lucide-react";
+import { ChevronDown, Play, Plus, ThumbsUp, X } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export function ActionsButtons(props: ActionsButtonsProps) {
   const { movieId, movie, isMyList } = props;
+  const router = useRouter();
+  const onPlayButton = () => {
+    router.push(`/movie/${movieId}`);
+  };
+
+  const onAddToMyList = () => {
+    console.log("add to my list");
+  };
+
+  const onRemoveFromMyList = () => {
+    console.log("remove from my list");
+  };
+
   return (
     <div className="mb-5 flex justify-between">
       <div className="flex gap-2">
@@ -12,9 +26,7 @@ export function ActionsButtons(props: ActionsButtonsProps) {
           size="icon"
           variant="ghost"
           className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-50"
-          onClick={() => {
-            console.log("click");
-          }}
+          onClick={() => onPlayButton()}
         >
           <Play className="h-3 w-3 fill-zinc-900 text-zinc-900" />
         </Button>
@@ -23,6 +35,7 @@ export function ActionsButtons(props: ActionsButtonsProps) {
             size="icon"
             variant="ghost"
             className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-gray-400 bg-zinc-900"
+            onClick={() => onRemoveFromMyList()}
           >
             <X
               width={10}
@@ -35,11 +48,19 @@ export function ActionsButtons(props: ActionsButtonsProps) {
             size="icon"
             variant="ghost"
             className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-gray-400 bg-zinc-900"
+            onClick={() => onAddToMyList()}
           >
             <ThumbsUp className="h-3 w-3 fill-zinc-900 text-slate-50" />
           </Button>
         )}
       </div>
+      <Button
+        size="icon"
+        variant="ghost"
+        className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-gray-400 bg-zinc-900"
+      >
+        <ChevronDown className="h-3 w-3 text-slate-50" height={10} width={10} />
+      </Button>
     </div>
   );
 }
