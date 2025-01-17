@@ -2,6 +2,7 @@
 import dynamic from "next/dynamic";
 
 import { ActionsButtonsFilm } from "@/components/Shared/ActionsButtonsFilm";
+import { ChaptersInfo } from "@/components/Shared/ChaptersInfo";
 
 import { InfoExtraFilmProps } from "./InfoExtraFilm.types";
 
@@ -25,6 +26,7 @@ export function InfoExtraFilm(props: InfoExtraFilmProps) {
       </div>
       <div className="p-4 shadow-lg">
         <ActionsButtonsFilm idFilm={movie.id} />
+        <ChaptersInfo age={movie.age} duration={movie.duration} />
       </div>
     </div>
   );
