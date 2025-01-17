@@ -9,6 +9,7 @@ import {
 import { CarouselMovieProps } from "./CarouselMovie.types";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
+import { ActionsButtons } from "./ActionsButtons";
 
 export function CarouselMovie(props: CarouselMovieProps) {
   const { movies, isMyList } = props;
@@ -38,7 +39,11 @@ export function CarouselMovie(props: CarouselMovieProps) {
                     className="w-full cursor-pointer rounded-t-lg object-cover shadow-xl transition-all duration-300"
                   />
                   <div className="p-2 shadow-lg">
-                    <p>Actions button</p>
+                    <ActionsButtons
+                      movieId={movie.id}
+                      movie={movie}
+                      isMyList={isMyList}
+                    />
                   </div>
                 </div>
               </CardContent>
