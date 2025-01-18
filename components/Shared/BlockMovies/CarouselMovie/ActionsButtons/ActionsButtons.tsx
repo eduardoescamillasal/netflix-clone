@@ -1,22 +1,25 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { ActionsButtonsProps } from "./ActionsButtons.types";
-import { ChevronDown, Play, Plus, ThumbsUp, X } from "lucide-react";
+import { ChevronDown, Play, ThumbsUp, X } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useLovedFilms } from "@/hooks/use-loved-films";
 
 export function ActionsButtons(props: ActionsButtonsProps) {
   const { movieId, movie, isMyList } = props;
+  const { addLovedFilm, removeLovedItem, lovedFilmsByUser } = useLovedFilms();
   const router = useRouter();
+
   const onPlayButton = () => {
     router.push(`/movie/${movieId}`);
   };
 
   const onAddToMyList = () => {
-    console.log("add to my list");
+    addLovedFilm(movie);
   };
 
   const onRemoveFromMyList = () => {
-    console.log("remove from my list");
+    removeLovedItem(movieId);
   };
 
   return (
