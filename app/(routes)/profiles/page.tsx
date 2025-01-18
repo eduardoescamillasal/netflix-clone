@@ -5,7 +5,7 @@ import { Profiles } from "./components/Profiles";
 
 export default async function ProfilePage() {
   const session = await auth();
-  console.log(session);
+
   if (!session?.user) {
     redirect("/login");
   }
@@ -16,7 +16,6 @@ export default async function ProfilePage() {
     },
   });
 
-  console.log({ userNetflix });
   return (
     <div className="flex h-full flex-col items-center justify-center bg-zinc-900">
       <div>

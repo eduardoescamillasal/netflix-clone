@@ -31,7 +31,6 @@ export function LoginForm() {
     },
   });
 
-  // 2. Define a submit handler.
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       login(values).then((data) => {

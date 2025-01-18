@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 
 import { NavbarFilm } from "./components/NavbarFilm";
+import { MovieVideo } from "./components/MovieVideo";
 
 export default async function MovieIdPage({
   params,
@@ -39,8 +40,9 @@ export default async function MovieIdPage({
       : "";
 
   return (
-    <div>
+    <div className="h-screen w-full bg-black">
       <NavbarFilm titleMovie={titleMovie} />
+      <MovieVideo currentMovie={currentMovie} />
     </div>
   );
 }
