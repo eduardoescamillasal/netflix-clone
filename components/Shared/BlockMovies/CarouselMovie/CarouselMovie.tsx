@@ -11,6 +11,7 @@ import { Card, CardContent } from "@/components/ui/card";
 
 import { ActionsButtons } from "./ActionsButtons";
 import { ChaptersInfo } from "./ChaptersInfo";
+import { FilmGenres } from "./FilmGenres";
 
 import { CarouselMovieProps } from "./CarouselMovie.types";
 
@@ -48,6 +49,7 @@ export function CarouselMovie(props: CarouselMovieProps) {
                       isMyList={isMyList}
                     />
                     <ChaptersInfo age={movie.age} duration={movie.duration} />
+                    <FilmGenres genres={movie.genre} />
                   </div>
                 </div>
               </CardContent>
