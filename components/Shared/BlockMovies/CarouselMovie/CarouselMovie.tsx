@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import {
   Carousel,
   CarouselContent,
@@ -5,11 +7,12 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { Card, CardContent } from "@/components/ui/card";
+
+import { ActionsButtons } from "./ActionsButtons";
+import { ChaptersInfo } from "./ChaptersInfo";
 
 import { CarouselMovieProps } from "./CarouselMovie.types";
-import { Card, CardContent } from "@/components/ui/card";
-import Image from "next/image";
-import { ActionsButtons } from "./ActionsButtons";
 
 export function CarouselMovie(props: CarouselMovieProps) {
   const { movies, isMyList } = props;
@@ -44,6 +47,7 @@ export function CarouselMovie(props: CarouselMovieProps) {
                       movie={movie}
                       isMyList={isMyList}
                     />
+                    <ChaptersInfo age={movie.age} duration={movie.duration} />
                   </div>
                 </div>
               </CardContent>
